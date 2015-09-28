@@ -1,0 +1,3 @@
+[submodule "hybridatv"]
+	path = hybridatv
+	url = git@github.com:/trimata/hybridatv.git
