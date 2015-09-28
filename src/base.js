@@ -1,6 +1,6 @@
 /* globals define */
 
-define([
+define('components/element', [
   'hybridatv/core/class',
   'hybridatv/core/domtv',
 ], function(Class, $) {
