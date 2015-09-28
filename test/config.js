@@ -28,7 +28,7 @@
     baseUrl: '/base/',
     paths: {
       hybridatv: 'hybridatv/dist/src',
-      sizzle: 'hybridatv/dist/bower_components/sizzle/dist/sizzle.min',
+      sizzle: 'hybridatv/dist/src/libs/sizzle.min',
     },
 
     deps: testFiles,
