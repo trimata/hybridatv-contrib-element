@@ -1,10 +1,18 @@
-/* globals define */
+/* globals define, requirejs */
 
-define('components/element', [
+define([
   'hybridatv/core/class',
   'hybridatv/core/domtv',
-], function(Class, $) {
+  'module',
+], function(Class, $, module) {
   'use strict';
+
+  // FIXME get the correct path
+  requirejs.config({
+    paths: {
+      'components/element': module.uri,
+    }
+  });
 
   var Element = Class.extend({
     init: function(el) {
