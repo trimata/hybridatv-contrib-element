@@ -3,16 +3,8 @@
 define([
   'hybridatv/core/class',
   'hybridatv/core/domtv',
-  'module',
-], function(Class, $, module) {
+], function(Class, $) {
   'use strict';
-
-  // FIXME get the correct path
-  requirejs.config({
-    paths: {
-      'components/element': module.uri,
-    }
-  });
 
   var Element = Class.extend({
     init: function(el) {
