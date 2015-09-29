@@ -30,9 +30,9 @@ module.exports = function(grunt) {
       },
     },
 
-    clean: {
+    version: {
       dist: {
-        src: 'dist',
+        src: ['package.json'],
       },
     },
 
@@ -42,19 +42,23 @@ module.exports = function(grunt) {
           expand: true,
           flatten: true,
           src: 'src/base.js',
-          dest: 'dist/',
+          dest: 'dist/' + grunt.file.readJSON('package.json').version,
         }],
       }
     },
   });
 
   grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-version');
 
   grunt.registerTask('test', ['karma']);
-  grunt.registerTask('build', [
-    'clean',
-    'copy',
-  ]);
+  grunt.registerTask('build', function(arg) {
+    arg = arg || 'patch';
+
+    grunt.task.run([
+      'version::' + arg,
+      'copy',
+    ]);
+  });
 };
