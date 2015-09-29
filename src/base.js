@@ -13,13 +13,13 @@ define([
     },
 
     setData: function(prop, val) {
-      this.$el(prop, val);
+      this.$el.data(prop, val);
 
       return this;
     },
 
     getData: function(prop) {
-      return this.$el(prop);
+      return this.$el.data(prop);
     },
 
     destroy: function() {
