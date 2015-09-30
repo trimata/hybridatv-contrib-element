@@ -11,7 +11,6 @@ module.exports = function(grunt) {
         files: [
           { pattern: 'src/**/*.js', included: false },
           { pattern: 'test/spec/**/*.js', included: false },
-          { pattern: 'hybridatv/dist/**/*.js', included: false },
 
           'test/config.js'
         ],

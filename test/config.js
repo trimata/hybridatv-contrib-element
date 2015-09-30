@@ -27,8 +27,7 @@
   require.config({
     baseUrl: '/base/',
     paths: {
-      hybridatv: 'hybridatv/dist/src',
-      sizzle: 'hybridatv/dist/src/libs/sizzle.min',
+      hybridatv: 'http://dev.bgitv.net/hybridatv/latest/src/',
     },
 
     deps: testFiles,
