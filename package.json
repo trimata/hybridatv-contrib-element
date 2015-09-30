@@ -1,6 +1,6 @@
 {
   "name": "hybridatv-element",
-  "version": "0.1.8",
+  "version": "0.1.12",
   "description": "the way to hbbtv",
   "main": "src/base.js",
   "private": true,

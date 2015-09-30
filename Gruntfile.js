@@ -3,6 +3,12 @@
 module.exports = function(grunt) {
   'use strict';
 
+  var data = {
+    expand: true,
+    flatten: true,
+    src: 'src/base.js',
+  };
+
   grunt.initConfig({
     karma: {
       options:{
@@ -37,12 +43,7 @@ module.exports = function(grunt) {
 
     copy: {
       dist: {
-        files: [{
-          expand: true,
-          flatten: true,
-          src: 'src/base.js',
-          dest: 'dist/' + grunt.file.readJSON('package.json').version,
-        }],
+        files: [data],
       }
     },
   });
@@ -53,6 +54,29 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test', ['karma']);
   grunt.registerTask('build', function(arg) {
+    var version = grunt.file.readJSON('package.json').version.split('.');
+    var newVersion;
+
+    arg = arg || 'patch';
+
+    switch(arg) {
+    case 'major':
+      version[0]++;
+      version[1] = 0;
+      version[2] = 0;
+      break;
+    case 'minor':
+      version[1]++;
+      version[2] = 0;
+      break;
+    default:
+      version[2]++;
+    }
+
+    newVersion = version.join('.');
+
+    data.dest = 'dist/' + newVersion;
+
     arg = arg || 'patch';
 
     grunt.task.run([
