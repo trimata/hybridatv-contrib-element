@@ -23,7 +23,7 @@ define([
 
 
     it('has reference to the DOM object', function() {
-      expect(elem.el).toEqual(_el);
+      expect(elem.raw()).toEqual(_el);
     });
 
   });

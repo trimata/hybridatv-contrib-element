@@ -2,46 +2,58 @@
 
 define([
   'hybridatv/core/class',
-  'hybridatv/core/domtv',
-], function(Class, $) {
+], function(Class) {
   'use strict';
 
-  var Element = Class.extend({
-    init: function(el) {
-      this.el = el;
-      this.$el = $(el);
+  return Class.extend({
+   init: function(el, config) {
+      this._el = el;
+      this._config = config || {};
+      this._listeners = {};
+      el._el = this;
     },
 
-    setData: function(prop, val) {
-      this.$el.data(prop, val);
+    //always use this method since prop can be changed
+    raw: function() {
+      return this._el;
+    },
+
+    config: function() {
+      return this._config;
+    },
+
+    on: function(evtName, handler) {
+      var fn = this._listeners[evtName];
+      var newFn;
+
+      if (typeof fn === 'function') {
+        this.raw().removeEventListener(evtName, fn);
+        newFn = function(evt) {
+          fn(evt);
+          handler(evt);
+        };
+        this._listen(evtName, newFn);
+      } else {
+        this._listen(evtName, handler);
+      }
 
       return this;
     },
 
-    getData: function(prop) {
-      return this.$el.data(prop);
+    _listen: function(evtName, handler) {
+      this.raw().addEventListener(evtName, handler);
+      this._listeners[evtName] = handler;
     },
 
-    destroy: function() {
-      this.$el.destroy();
+    off: function(evtName) {
+      var fn = this._listeners[evtName];
+
+      if (typeof fn === 'function') {
+        this.raw().removeEventListener(evtName, fn);
+      }
 
       return this;
     },
 
-    show: function() {
-      this.$el.show();
-
-      return this;
-    },
-
-    hide: function() {
-      this.$el.hide();
-
-      return this;
-    },
-
-    type: 'Hb-Element',
   });
-
-  return Element;
 });
